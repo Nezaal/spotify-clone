@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.left {
+    width: 25vw;
+    padding: 10px;
+
+}
+
+.right {
+    width: 75vw;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+.home ul li {
+    display: flex;
+    gap: 15px;
+    width: 14px;
+    list-style: none;
+    padding-top: 14px 24px;
+    font-weight: bold;
+}
+
+.heading {
+    display: flex;
+    gap: 15px;
+    width: 200px;
+    padding-top: 14px;
+    font-weight: bold;
+    align-items: center;
+    font-size: 10px;
+}
+
+.library {
+    min-height: 80vh;
+    position: relative;
+}
+
+.heading img {
+    width: 15px;
+}
+
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 10px;
+    color: grey;
+    gap: 13px;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer a {
+    color: grey;
+}
+
+.right {
+    margin: 16px 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: grey;
+    border-radius: 5px;
+
+}
+
+.header>* {
+    padding: 20px;
+}
+
+.spotifyPlaylists {
+    padding: 16px;
+}
+
+.spotifyPlaylists .card {
+    width: 75px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #252525;
+
+
+}
+
+.cardContainer {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 30px;
+    overflow-y: scroll;
+    max-height: 80vh;
+}
+
+.card {
+    position: relative;
+}
+
+.card>* {
+    padding-top: 10px;
+}
+
+.card img {
+    width: 100%;
+    object-fit: contain;
+}
+
+
+.play {
+    position: absolute;
+    top: 125px;
+    right: 14px;
+    opacity: 0;
+    transition: all 1s ease-out;
+}
+
+.button>* {
+    margin: 0 5px;
+}
+
+.signupBtn {
+    background-color: grey;
+    color: white;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.signupBtn:hover {
+    font-size: 16px;
+    color: white;
+    background-color: green;
+    border-radius: 17px;
+    padding: 5px;
+    width: 79px;
+
+}
+
+.loginBtn {
+    background-color: white;
+    border-radius: 17px;
+    color: black;
+    padding: 5px;
+    width: 79px;
+    cursor: pointer;
+}
+
+.loginBtn:hover {
+    font-weight: bold;
+    width: 80px;
+}
+
+.playbar{
+    position: absolute;
+    bottom: 0;
+    background-color: green ;
+    width: 100%;
+    padding: 12px;
+}
+
+.songbuttons{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
