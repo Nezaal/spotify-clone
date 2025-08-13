@@ -1,8 +1,6 @@
-
-
 console.log("lets write js");
 
-async function main() {
+async function getSongs() {
     let a = await fetch("http://127.0.0.1:5500/songs/");
     let response = await a.text();
 
@@ -12,12 +10,37 @@ async function main() {
     let div = document.createElement("div");
     div.innerHTML = response;
 
-    let tds = div.getElementsByTagName("td");
+    let as = div.getElementsByTagName("a");
 
-    console.log("Text inside <td> tags:");
-    for (let i = 0; i < tds.length; i++) {
-        console.log(tds[i].textContent.trim());
+    let songs = [];
+    for (let index  = 0; index < as.length; index++) {
+        const element = as[index]
+        if(element.href.endsWith(".mp3")){
+            songs.push(element.href.split("/songs/")[1])
+        }
     }
+    return songs;
 }
 
-main();
+async function main(){
+
+    let songs = await getSongs();
+    console.log(songs)
+
+    let songUl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+    for (const song of songs) {
+        songUl.innerHTML = songUl.innerHTML + `<li> ${song.replaceAll("%20", " ")} </li>`;
+        
+    }
+
+    // palying audio
+    var audio = new Audio(songs[0])
+    audio.play(); 
+    
+    audio.addEventListener("ontimeUpdate", () =>{
+        let duration = audio.duration;
+        console.log(duration)
+    });
+} 
+
+main()

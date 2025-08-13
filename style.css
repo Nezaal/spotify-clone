@@ -176,7 +176,7 @@ body {
     position: absolute;
     bottom: 0;
     background-color: green ;
-    width: 100%;
+    width: 90%;
     padding: 12px;
 }
 
@@ -184,4 +184,14 @@ body {
     display: flex;
     gap: 15px;
     justify-content: center;
+}
+
+.songlist ul{
+    padding: 0 42px;
+}
+
+.songlist ul li{
+    list-style-type: decimal;
+    display: flex;
+    
 }
