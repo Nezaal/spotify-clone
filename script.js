@@ -29,7 +29,20 @@ async function main(){
 
     let songUl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
     for (const song of songs) {
-        songUl.innerHTML = songUl.innerHTML + `<li> ${song.replaceAll("%20", " ")} </li>`;
+        songUl.innerHTML = songUl.innerHTML + `<li> 
+        
+                            <img src="svg files/music.svg" alt="">
+                            <div class="info">
+                                <div>${song.replaceAll(/%20|%26|.mp3/g, " ")}</div>
+                                <div></div>
+                            </div>
+
+                            <div class="playnow">
+                                <span>Play Now</span>
+                                <img src="svg files/playnow.svg" alt="">
+                            </div>
+            
+         </li>`;
         
     }
 

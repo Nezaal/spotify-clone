@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Spotify clone</title>
     <link rel="stylesheet" href="style.css">
 
     <link rel="stylesheet" href="utility.css">
@@ -14,7 +14,7 @@
 
 <body>
     <div class="container flex bg-black">
-
+        <!-- left div -->
         <div class="left ">
             <div class="home rounded bg-grey m-1 p-1">
 
@@ -33,19 +33,26 @@
             <div class="library bg-grey rounded m-1 p-1">
                 <div class="heading">
                     <img class="invert" src="svg files/playlist.svg" alt="">
-
+                    <!-- library -->
                     <h2>Your library</h2>
                 </div>
-
+                <!-- 
+                song list + card in library
+                 -->
                 <div class="songlist">
                     <ul>
                         <li>
                             <img src="svg files/music.svg" alt="">
+                            <div class="info">
+                                <div>Song name</div>
+                                <div>Artist name</div>
+                            </div>
+
+                            <div class="playnow">
+                                <span>Play Now</span>
+                                <img src="svg files/playnow.svg" alt="">
+                            </div>
                         </li>
-                        <div class="info">
-                            <div class="songname"></div>
-                            <div class="songartist"></div>
-                        </div>
                     </ul>
                 </div>
 

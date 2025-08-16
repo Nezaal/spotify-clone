@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap');
 
-
 * {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    font-size: small;
 }
 
 body {
@@ -172,26 +172,64 @@ body {
     width: 80px;
 }
 
-.playbar{
-    position: absolute;
+.playbar {
+    position: fixed;
     bottom: 0;
-    background-color: green ;
-    width: 90%;
+    background-color: green;
+    width: 70%;
     padding: 12px;
+    border-radius: 10px;
+    justify-self: center;
+    bottom: 30px;
 }
 
-.songbuttons{
+.songbuttons {
     display: flex;
     gap: 15px;
     justify-content: center;
 }
 
-.songlist ul{
-    padding: 0 42px;
+.songlist {
+    height: 320px;
+    overflow: scroll;
+    margin-bottom: 44px ;
+    margin-top: 20px;
+
 }
 
-.songlist ul li{
-    list-style-type: decimal;
+.songlist ul li {
     display: flex;
-    
+    /* makes the icon and text sit in a row */
+    align-items: center;
+    /* vertically centers the icon with the text */
+    /* optional spacing between icon and text */
+    gap: 10px;
+    cursor: pointer;
+    padding: 12px 0;
+    border: 1px solid white;
+    margin: 7px 0;
+    border-radius: 5px;
+    padding: 10px;
+    justify-content: space-between;
+
+}
+
+.songlist ul li .info {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    /* keeps song name and artist stacked vertically */
+
+}
+
+.playnow {
+    display: flex;
+    padding: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.playnow span {
+    font-size: 10px;
+    width: 60px;
 }
