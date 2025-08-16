@@ -178,9 +178,10 @@ body {
     background-color: green;
     width: 70%;
     padding: 12px;
-    border-radius: 10px;
+    border-radius: 200px;
     justify-self: center;
     bottom: 30px;
+    height: 30px;
 }
 
 .songbuttons {
@@ -192,7 +193,7 @@ body {
 .songlist {
     height: 320px;
     overflow: scroll;
-    margin-bottom: 44px ;
+    margin-bottom: 44px;
     margin-top: 20px;
 
 }
@@ -232,4 +233,26 @@ body {
 .playnow span {
     font-size: 10px;
     width: 60px;
+}
+
+.seekbar {
+    height: 2px;
+    width: 90%;
+    background-color:  black;
+    position: absolute;
+    bottom: 9px;
+    border-radius: 10px;
+    margin: 5px;
+
+}
+
+.circle {
+    bottom: 6px;
+    width: 14px;
+    height: 14px;
+    background-color: black;
+    border-radius: 20px;
+    position: relative;
+    left: 0%;
+    transition: left 0.5s;
 }
