@@ -1,5 +1,7 @@
 console.log("lets write js");
 
+let currentSong = new Audio();
+
 async function getSongs() {
     let a = await fetch("http://127.0.0.1:5500/songs/");
     let response = await a.text();
@@ -22,9 +24,18 @@ async function getSongs() {
     return songs;
 }
 
+
+const playMusic = (track) =>{
+    // let audio = new Audio("/songs/" + track);
+
+    currentSong.src = "/songs/" + track;
+    currentSong.play();
+
+}
+
 async function main(){
-     
-    let currentSong;
+
+ 
     let songs = await getSongs();
     console.log(songs)
 // show all the songs in the play list
@@ -34,7 +45,7 @@ async function main(){
         
                             <img src="svg files/music.svg" alt="">
                             <div class="info">
-                                <div>${song.replaceAll(/%20|%26|.mp3/g, " ")}</div>
+                                <div>${song.replaceAll(/%20/g, " ")}</div>
                                 <div> </div>
                             </div>
 
@@ -46,9 +57,14 @@ async function main(){
     }
     // -----
     // attach an even listener to each song
-    Array.from(document.querySelector("songlist").getElementsByTagName("li")).forEach(e =>{
-        console.log(e);
-    })
+    Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e =>{
+        addEventListener("click", element =>{
+
+            console.log(e.querySelector(".info").firstElementChild.innerHTML);
+            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
+            
+        })
+    })    
 } 
 
 main()
