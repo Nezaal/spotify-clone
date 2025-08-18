@@ -28,8 +28,10 @@ async function getSongs() {
 const playMusic = (track) =>{
     // let audio = new Audio("/songs/" + track);
 
+    currentSong.pause();        // stop previous
+    currentSong.currentTime = 0; // reset
     currentSong.src = "/songs/" + track;
-    currentSong.play();
+    currentSong.play().catch(err => console.log(err));;
 
 }
 
@@ -57,11 +59,12 @@ async function main(){
     }
     // -----
     // attach an even listener to each song
-    Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e =>{
-        addEventListener("click", element =>{
+    Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(li =>{
+        li.addEventListener("click", () =>{
 
-            console.log(e.querySelector(".info").firstElementChild.innerHTML);
-            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
+            let songname = li.querySelector(".info").firstElementChild.innerHTML;
+            console.log(songname);
+            playMusic(songname);
             
         })
     })    
