@@ -241,7 +241,7 @@ body {
     background-color:  black;
     position: absolute;
     bottom: 9px;
-    border-radius: 10px;
+    border-radius: 50%;
     margin: 5px;
 
 }
@@ -256,3 +256,20 @@ body {
     left: 0%;
     transition: left 0.5s;
 }
+ .songbuttons img {
+    cursor: pointer;
+
+ }
+
+ .abovebar{
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+ }
+
+ .songinfo, .songtime{
+    color: black;
+    font-size: smaller;
+    font-weight: bold;
+    padding: 0 12px;
+ }
