@@ -1,55 +1,69 @@
-    console.log("lets write js");
+console.log("lets write js");
 
-    let currentSong = new Audio();
+let currentSong = new Audio();
 
-    async function getSongs() {
-        let a = await fetch("http://127.0.0.1:5500/songs/");
-        let response = await a.text();
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60); // ensures no decimal part
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+}
 
-        console.log("Fetched HTML:");
-        console.log(response);
 
-        let div = document.createElement("div");
-        div.innerHTML = response;
 
-        let as = div.getElementsByTagName("a");
+async function getSongs() {
+    let a = await fetch("http://127.0.0.1:5500/songs/");
+    let response = await a.text();
 
-        let songs = [];
-        for (let index  = 0; index < as.length; index++) {
-            const element = as[index]
-            if(element.href.endsWith(".mp3")){
-                songs.push(element.href.split("/songs/")[1])
-            }
+    console.log("Fetched HTML:");
+    console.log(response);
+
+    let div = document.createElement("div");
+    div.innerHTML = response;
+
+    let as = div.getElementsByTagName("a");
+
+    let songs = [];
+    for (let index = 0; index < as.length; index++) {
+        const element = as[index]
+        if (element.href.endsWith(".mp3")) {
+            songs.push(element.href.split("/songs/")[1])
         }
-        return songs;
     }
+    return songs;
+}
 
 
-    const playMusic = (track) =>{
-        // let audio = new Audio("/songs/" + track);
+const playMusic = (track, pause = true) => {
+    // let audio = new Audio("/songs/" + track);
 
-        currentSong.pause();        // stop previous
-        currentSong.currentTime = 0; // reset
-        currentSong.src = "/songs/" + track;
+    currentSong.pause();        // stop previous
+    currentSong.currentTime = 0; // reset
+    currentSong.src = "/songs/" + track;
+    if (!pause) {
+
         currentSong.play().catch(err => console.log(err));
-        play.src = "/svg files/pause.svg"
-
-        console.log(document.querySelector(".songinfo").innerHTML = track)
-        console.log(document.querySelector(".songtime").innerHTML = "00:00/00:00")
-
     }
+    play.src = "/svg files/pause.svg"
 
-    async function main(){
+    console.log(document.querySelector(".songinfo").innerHTML = decodeURI(track))
+    console.log(document.querySelector(".songtime").innerHTML = "00:00/00:00")
 
-    
-        let songs = await getSongs();
-        console.log(songs)
+}
+
+async function main() {
+
+
+    let songs = await getSongs();
+
+    playMusic(songs[0], pause = false)
+
+    console.log(songs)
     // show all the songs in the play list
-        let songUl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
-        for (const song of songs) {
-            songUl.innerHTML = songUl.innerHTML + 
+    let songUl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+    for (const song of songs) {
+        songUl.innerHTML = songUl.innerHTML +
 
-                                `<li> 
+            `<li> 
             
                                 <img src="svg files/music.svg" alt="">
                                 <div class="info">
@@ -63,37 +77,69 @@
                                 </div> 
                                 
                                 </li>`;
-            
+
+    }
+    // -----
+    // attach an even listener to each song
+    Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(li => {
+        li.addEventListener("click", () => {
+
+            let songname = li.querySelector(".info").firstElementChild.innerHTML;
+            console.log(songname);
+            playMusic(songname);
+
+        })
+    })
+
+    // attach an event listener to play , previous and next button;
+
+    play.addEventListener("click", () => {
+        if (currentSong.paused) {
+            currentSong.play()
+            play.src = "/svg files/pause.svg";
+        } else {
+            currentSong.pause();
+            play.src = "/svg files/play.svg";
         }
-        // -----
-        // attach an even listener to each song
-        Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(li =>{
-            li.addEventListener("click", () =>{
+    })
 
-                let songname = li.querySelector(".info").firstElementChild.innerHTML;
-                console.log(songname);
-                playMusic(songname);
-                
-            })
-        })    
+    // listen for time update event
 
-        // attach an event listener to play , previous and next button;
+    // Update time and seek bar circle
+    currentSong.addEventListener("timeupdate", () => {
+        document.querySelector(".songtime").innerHTML =
+            `${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`;
 
-        play.addEventListener("click", () =>{
-            if(currentSong.paused){
-                currentSong.play()
-                play.src = "/svg files/pause.svg";
-            }else{
-                currentSong.pause();
-                play.src = "/svg files/play.svg";
-            }
-        })
+        let percent = (currentSong.currentTime / currentSong.duration) * 100;
+        document.querySelector(".circle").style.left = percent + "%";
+    });
 
-        // listen for time update event
+    // Add event listener to seekbar    
+    document.querySelector(".seekbar").addEventListener("click", e => {
+        let seekbar = e.target;
+        let percent = (e.offsetX / seekbar.getBoundingClientRect().width);
 
-        currentSong.addEventListener("timeupdate", ()=>{
-            
-        })
-    } 
+        // Move circle visually
+        document.querySelector(".circle").style.left = (percent * 100) + "%";
 
-    main()
+        // Update song current time
+        currentSong.currentTime = percent * currentSong.duration;
+
+        
+    });
+
+
+    // eveent listener or hamburger
+    document.querySelector(".hamburger").addEventListener("click", () =>{
+        document.querySelector(".left").style.left = "0";
+    });
+
+
+    // event listesr for close button 
+    document.querySelector(".close").addEventListener("click", () =>{
+        document.querySelector(".left").style.left = "-100%"
+    });
+    
+}   
+
+main()
