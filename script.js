@@ -63,7 +63,7 @@ async function main() {
     for (const song of songs) {
         songUl.innerHTML = songUl.innerHTML +
 
-            `<li> 
+                            `<li> 
             
                                 <img src="svg files/music.svg" alt="">
                                 <div class="info">
@@ -76,7 +76,7 @@ async function main() {
                                     <img src="svg files/playnow.svg" alt="">
                                 </div> 
                                 
-                                </li>`;
+                            </li>`;
 
     }
     // -----
