@@ -1,11 +1,20 @@
 console.log("lets write js");
 
 let currentSong = new Audio();
+let songs;
 
 function formatTime(seconds) {
+
+
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60); // ensures no decimal part
-    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+
+    if (isNaN(minutes) || isNaN(secs)) {
+        return "00:00";
+    } else {
+        return `${minutes}:${secs.toString().padStart(2, '0')}`;
+    }
+
 }
 
 
@@ -15,7 +24,7 @@ async function getSongs() {
     let response = await a.text();
 
     console.log("Fetched HTML:");
-    console.log(response);
+    // console.log(response);
 
     let div = document.createElement("div");
     div.innerHTML = response;
@@ -45,15 +54,15 @@ const playMusic = (track, pause = true) => {
     }
     play.src = "/svg files/pause.svg"
 
-    console.log(document.querySelector(".songinfo").innerHTML = decodeURI(track))
-    console.log(document.querySelector(".songtime").innerHTML = "00:00/00:00")
+    document.querySelector(".songinfo").innerHTML = decodeURI(track)
+    document.querySelector(".songtime").innerHTML = "00:00/00:00"
 
 }
 
 async function main() {
 
 
-    let songs = await getSongs();
+    songs = await getSongs();
 
     playMusic(songs[0], pause = false)
 
@@ -63,7 +72,7 @@ async function main() {
     for (const song of songs) {
         songUl.innerHTML = songUl.innerHTML +
 
-                            `<li> 
+            `<li> 
             
                                 <img src="svg files/music.svg" alt="">
                                 <div class="info">
@@ -80,7 +89,7 @@ async function main() {
 
     }
     // -----
-    // attach an even listener to each song
+    // attach an even listener to each song.
     Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(li => {
         li.addEventListener("click", () => {
 
@@ -125,21 +134,56 @@ async function main() {
         // Update song current time
         currentSong.currentTime = percent * currentSong.duration;
 
-        
+
     });
 
 
     // eveent listener or hamburger
-    document.querySelector(".hamburger").addEventListener("click", () =>{
+    document.querySelector(".hamburger").addEventListener("click", () => {
         document.querySelector(".left").style.left = "0";
     });
 
 
     // event listesr for close button 
-    document.querySelector(".close").addEventListener("click", () =>{
+    document.querySelector(".close").addEventListener("click", () => {
         document.querySelector(".left").style.left = "-100%"
     });
+
+
+    // button for prev and next buttons
+    previous.addEventListener("click", () => {
+        console.log("previous clicked");
+        console.log(currentSong.src);
+
+        let filename = currentSong.src.split("/").pop();
+        let index = songs.indexOf(filename);
+
+        console.log(songs, index);
+
+        if (index > 0) {
+            playMusic(songs[index - 1]);
+        } else {
+            console.log("Already at first song!");
+        }
+    });
+
+    next.addEventListener("click", () => {
+        console.log("next clicked");
+
+        let filename = currentSong.src.split("/").pop();
+        let index = songs.indexOf(filename);
+
+        console.log(songs, index);
+
+        if (index < songs.length - 1) {
+            playMusic(songs[index + 1]);
+        } else {
+            console.log("Already at last song!");
+        }
+    });
+
     
-}   
+
+}
 
 main()

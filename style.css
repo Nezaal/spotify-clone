@@ -212,7 +212,6 @@ body {
 } 
 
 
-
 .songlist {
     height: 320px;
     overflow: scroll;
@@ -282,7 +281,7 @@ body {
 
 .songbuttons img {
     cursor: pointer;
-
+    width: 20px;
 }
 
 .abovebar {
@@ -291,11 +290,11 @@ body {
     justify-content: space-between;
 }
 
-/* .songinfo, */
-.songtime {
+.songinfo, .songtime {
+    width: 250px;
     color: black;
-    font-size: smaller;
-    font-weight: bold;
+    /* font-size: smaller; */
+    /* font-weight: bold; */
     padding: 0 12px;
 }
 
