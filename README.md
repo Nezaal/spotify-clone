@@ -13,9 +13,5 @@
 * Github: [@Nezaal](https://github.com/Nezaal)
 * LinkedIn: [@Nezaal Ahmad](https://linkedin.com/in/Nezaal Ahmad)
 
-## Show your support
 
-Give a ⭐️ if this project helped you!
 
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
